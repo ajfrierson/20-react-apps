@@ -10,10 +10,18 @@ function padTime(time) {
 export default function App() {
   //state variables used to set title and time left
 const [title, setTitle] = useState('Let the countdown begin!!!')
-const [timeLeft, setTimeLeft] = useState(25 * 60);
+const [timeLeft, setTimeLeft] = useState(10);
 
 function startTimer(){
+  setInterval(() => {
+    setTimeLeft(timeLeft => {
 
+      if(timeLeft >= 1) {
+        return timeLeft - 1
+      }
+      return 0;
+    })
+  }, 1000)
 };
   //minute and second variables 
 const minutes = padTime(Math.floor(timeLeft / 60));
