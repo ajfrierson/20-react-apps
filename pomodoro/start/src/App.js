@@ -4,7 +4,7 @@ import './App.css';
 export default function App() {
   return (
     <div className="app">
-      <h2>Pomodoro!</h2>
+      <h2>This is my Pomodoro!</h2>
 
       <div className="timer">
         <span>00</span>
