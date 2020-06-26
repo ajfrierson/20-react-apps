@@ -10,10 +10,14 @@ function padTime(time) {
 export default function App() {
   //state variables used to set title and time left
 const [title, setTitle] = useState('Let the countdown begin!!!')
-const [timeLeft, setTimeLeft] = useState(10);
+const [timeLeft, setTimeLeft] = useState(25 * 60);
 const intervalRef = useRef(null);
+const [isRunning, setIsRunning] = useState(false);
 
 function startTimer(){
+  setIsRunning(true);
+  if(intervalRef.current !== null) return;
+
   setTitle(`You're doing great!`)
  intervalRef.current = setInterval(() => {
     setTimeLeft(timeLeft => {
@@ -22,15 +26,25 @@ function startTimer(){
         return timeLeft - 1
       }
       //reset timer here
+      resetTimer();
       return 0;
     })
   }, 1000)
 };
   //stop timer function
 function stopTimer(){
+  setIsRunning(false);
+  if(intervalRef.current === null) return;
   clearInterval(intervalRef.current);
   setTitle('Keep it up!');
-}
+};
+  //reset timer function
+function resetTimer(){
+  clearInterval(intervalRef.current);
+  setTitle('Ready to go another round?');
+  setTimeLeft(25 * 60);
+  setIsRunning(false);
+};
 
   //minute and second variables 
 const minutes = padTime(Math.floor(timeLeft / 60));
@@ -47,9 +61,9 @@ const seconds = padTime((timeLeft - minutes * 60));
       </div>
 
       <div className="buttons">
-        <button onClick={startTimer}>Start</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button>Reset</button>
+        {!isRunning && <button onClick={startTimer}>Start</button>}
+        {isRunning && <button onClick={stopTimer}>Stop</button>}
+        <button onClick={resetTimer}>Reset</button>
       </div>
     </div>
   );
