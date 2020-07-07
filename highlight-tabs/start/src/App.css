@@ -96,10 +96,11 @@ body {
    position: absolute;
    height: 80px;
    width: 300px; 
+   transition: 0.3s ease all;
    border-radius: 50%;
    background: radial-gradient(
      rgba(157, 128, 238, 1),rgba(157, 128, 238, 0));
-   opacity: 1;
+   opacity: 0.8;
    pointer-events: none;
    top: -10px;
  }
