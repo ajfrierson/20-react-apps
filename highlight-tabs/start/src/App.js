@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+   const [highlightStyle, setHighlightStyle] = useState({ left: 0})
   return (
     <div className="app">
       <div className="browser">
         <div className="tabs">
           <div className="tab">
+            <div className="highlight" style={{left: -100}} />
             <a>Home</a>
           </div>
           <div className="tab">
